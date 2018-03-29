@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Calculator"
+	xmlns:vm="clr-namespace:Calculator.ViewModels"
+    x:Class="Calculator.MainPage">
+
+	<Grid BackgroundColor="{DynamicResource CalculatorBackgroundColor}">
+		<Grid.BindingContext>
+			<vm:MainViewModel/>
+		</Grid.BindingContext>
+
+		<!--Style="{StaticResource PageGridStyle}"-->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="37"/>
+			<RowDefinition Height="36"/>
+			<RowDefinition Height="36"/>
+			<RowDefinition Height="36"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Padding="0,10,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="6*"/>
+				<ColumnDefinition Width="13*"/>
+				<ColumnDefinition Width="2*"/>
+			</Grid.ColumnDefinitions>
+
+
+			<local:CustomButton Grid.Column="0" BackgroundColor="{DynamicResource CalculatorBackgroundColor}" 
+					Image="Assets/menu-three-horizontal-lines-symbol.png" 
+					BorderWidth="2" HeightRequest ="50"/>
+
+			<Label Grid.Column="1" Text="STANDART" VerticalOptions="Center" />
+
+			<local:CustomButtonMemory Grid.Column="3" BackgroundColor="{DynamicResource CalculatorBackgroundColor}" 
+					Image="Assets/counterclockwise-rotation.png" BorderWidth="0" HeightRequest ="50"/>
+
+		</Grid>
+		<Label Grid.Row="1" Text="{Binding AllProcess}" HorizontalTextAlignment="End" Margin="0,0,15,0" />
+		<Label Grid.Row="2" Text="{Binding EntryString}" HorizontalTextAlignment="End" Margin="0,0,15,0" />
+
+		<!-- Button Row -->
+		<Grid Grid.Row="3" Padding="1" RowSpacing="1" ColumnSpacing="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Button x:Name="_mcButton" Grid.Column="0" Text="MC" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70" />
+			<Button  Grid.Column="1" Text="MR" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+			<Button  Grid.Column="2" Text="M+" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+			<Button  Grid.Column="3" Text="M-" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+			<Button  Grid.Column="4" Text="MS" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+			<Button  Grid.Column="5" Text="M▼" FontSize="13" BackgroundColor="{DynamicResource CalculatorBackgroundColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+
+		</Grid>
+
+		<Grid Grid.Row="4" Padding="5,5,5,5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+
+			<local:CustomButtonLeftTop Grid.Row="0" Grid.Column="0" Text="%" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand" HeightRequest ="70"/>
+			<!--Clicked="OnButtonClicked"-->
+			<local:CustomButtonLeftTop Grid.Row="0" Grid.Column="1" Text="√" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonLeftTop Grid.Row="0" Grid.Column="2" Text="x²" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonLeftTop Grid.Row="0" Grid.Column="3" Text="1/x" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+
+			<local:CustomButtonLeftTop Grid.Row="1" Grid.Column="0" Text="CE" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonLeftTop Grid.Row="1" Grid.Column="1" Text="C" FontSize="17" Command="{Binding ClearInputs}"
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonLeftTop Grid.Row="1" Grid.Column="2" Text="DEL" FontSize="17" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonOperation Grid.Row="1" Grid.Column="3" Text="/" FontSize="17" Command="{Binding TotalCommand}" CommandParameter="4"
+	            BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+
+			<local:CustomButtonNumber Grid.Row="2" Grid.Column="0" Text="7" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="7"
+			    BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="2" Grid.Column="1" Text="8" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="8"
+			    BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="2" Grid.Column="2" Text="9" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="9"
+			    BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonOperation Grid.Row="2" Grid.Column="3" Text="X" FontSize="17" Command="{Binding TotalCommand}" CommandParameter="5"
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+
+			<local:CustomButtonNumber Grid.Row="3" Grid.Column="0" Text="4" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="4"
+				BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="3" Grid.Column="1" Text="5" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="5"
+				BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="3" Grid.Column="2" Text="6" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="6"
+				BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonOperation Grid.Row="3" Grid.Column="3" Text="-" FontSize="25"  Command="{Binding TotalCommand}" CommandParameter="3"
+	            BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+
+			<local:CustomButtonNumber Grid.Row="4" Grid.Column="0" Text="1" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="1"
+                BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="4" Grid.Column="1" Text="2" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="2"
+				BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="4" Grid.Column="2" Text="3" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="3"
+		        BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonOperation Grid.Row="4" Grid.Column="3" Text="+" FontSize="25" Command="{Binding TotalCommand}" CommandParameter="2"
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+
+			<local:CustomButtonLeftTop Grid.Row="5" Grid.Column="0" Text="+/-" FontSize="17" Command="{Binding OppositeNumber}"
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="5" Grid.Column="1" Text="0" FontSize="20" FontAttributes="Bold" Command="{Binding GetNumber}" CommandParameter="0"
+		        BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonNumber Grid.Row="5" Grid.Column="2" Text="," FontSize="20" FontAttributes="Bold" 
+				BackgroundColor="{DynamicResource ButtonNumberColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+			<local:CustomButtonOperation Grid.Row="5" Grid.Column="3" Text="=" FontSize="25"  Command="{Binding TotalCommand}" CommandParameter="6" 
+				BackgroundColor="{DynamicResource ButtonOperationColor}"  VerticalOptions="CenterAndExpand"  HeightRequest ="70"/>
+
+		</Grid>
+
+	</Grid>
+</ContentPage>
